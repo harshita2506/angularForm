@@ -1,0 +1,101 @@
+<div mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <mat-toolbar class="mb-7" color='primary' cdkDragHandle>
+    <h2 style="margin-left: 84px;
+    margin-top: 26px;">Registration Form</h2>
+  </mat-toolbar>
+</div>
+<form [formGroup]="addregistrationForm" (ngSubmit)="onSumbit()">
+
+  <p>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input type="text" appAlphabetOnly matInput formControlName="first_name" required>
+      <mat-error
+        *ngIf="addregistrationForm.get('first_name').touched && addregistrationForm.get('first_name').errors?.required">
+        First Name is required.
+      </mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input type="text" appAlphabetOnly matInput formControlName="last_name" required>
+      <mat-error
+        *ngIf="addregistrationForm.get('last_name').touched && addregistrationForm.get('last_name').errors?.required">
+        Last Name is required.
+      </mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Mobile Number</mat-label>
+      <input type="text" appNumberOnly matInput formControlName="mobile_number" required>
+      <mat-error
+        *ngIf="addregistrationForm.get('mobile_number').touched && addregistrationForm.get('mobile_number').errors?.required">
+        Mobile Number is required.
+      </mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="text" matInput formControlName="email" required>
+      <mat-error *ngIf="addregistrationForm.get('email').touched && addregistrationForm.get('email').errors?.required">
+        Email is required.
+      </mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field class="inline-fields">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dob" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="addregistrationForm.get('dob').touched && addregistrationForm.get('dob').errors?.required">
+        Date-of-birth is required.
+      </mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input type="text" matInput formControlName="address">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>City</mat-label>
+      <input type="text" matInput formControlName="city">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>State</mat-label>
+      <input type="text" matInput formControlName="state">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="text" matInput formControlName="password" required>
+      <mat-error *ngIf="addregistrationForm.hasError('required', 'password')">
+        Please enter your password
+      </mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input matInput formControlName="confirmPassword" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="addregistrationForm.hasError('notSame')">
+        Passwords do not match
+      </mat-error>
+    </mat-form-field>
+  </p>
+
+  <mat-dialog-actions>
+    <button [disabled]="addregistrationForm.invalid" type="submit" color="primary" class="buttoncls"
+      mat-raised-button>Add</button><span style="margin:20px;"></span>
+    <button mat-raised-button color="accent" (click)="cancelbtn()">Cancel</button>
+  </mat-dialog-actions>
+</form>
